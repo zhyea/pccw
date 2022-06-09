@@ -5,4 +5,19 @@ server:
 
 spring:
   application:
-    name: spring-boot-test2
+    name: cm-business
+  datasource:
+    type: org.apache.commons.dbcp2.BasicDataSource
+    url: jdbc:mysql://127.0.0.1:3306/pccw?useAffectedRows=true&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: root
+    password: root
+    dbcp2:
+      validation-query: SELECT 1
+      pool-prepared-statements: true
+    platform: mysql
+    schema: classpath:schema.sql
+    initialization-mode: always
+
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true

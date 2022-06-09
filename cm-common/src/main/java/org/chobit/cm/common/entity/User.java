@@ -1,4 +1,4 @@
-package org.chobit.cm.entity;
+package org.chobit.cm.common.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

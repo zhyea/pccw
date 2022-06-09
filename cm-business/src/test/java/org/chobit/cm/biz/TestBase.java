@@ -1,4 +1,4 @@
-package org.chobit.cm;
+package org.chobit.cm.biz;
 
 
 import org.junit.runner.RunWith;

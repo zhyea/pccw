@@ -1,7 +1,7 @@
 package org.chobit.cm.dao;
 
 import org.apache.ibatis.annotations.*;
-import org.chobit.cm.entity.User;
+import org.chobit.cm.common.entity.User;
 
 import java.util.List;
 
@@ -19,7 +19,8 @@ public interface UserMapper {
             "insert into user (username, password, email, name)",
             "values (#{username}, #{password}, #{email}, #{name})"
     })
-    Long insert(User user);
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    boolean insert(User user);
 
 
     /**
