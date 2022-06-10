@@ -87,4 +87,18 @@ public class User implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", deleted=" + deleted +
+                ", opTime=" + opTime +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

@@ -72,4 +72,14 @@ public interface UserMapper {
      * @return 用户记录
      */
     User getByUsername(@Param("username") String username);
+
+
+    /**
+     * 删除用户记录
+     *
+     * @param id 记录ID
+     * @return 是否删除成功
+     */
+    @Delete({"delete from user where id=#{id}"})
+    boolean delete(@Param("id") Long id);
 }

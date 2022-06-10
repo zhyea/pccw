@@ -1,11 +1,18 @@
 package org.chobit.cm.biz;
 
 
-import org.junit.runner.RunWith;
+import org.chobit.cm.biz.tools.BeanKit;
+import org.springframework.beans.BeansException;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TestBase {
+public class TestBase implements ApplicationContextAware {
+
+
+    @Override
+    public void setApplicationContext(ApplicationContext context) throws BeansException {
+        BeanKit.init(context);
+    }
 }

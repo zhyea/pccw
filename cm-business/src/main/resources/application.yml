@@ -1,22 +1,14 @@
 debug: false
 
-server:
-  port: 8087
-
 spring:
   application:
     name: cm-business
-  datasource:
-    type: org.apache.commons.dbcp2.BasicDataSource
-    url: jdbc:mysql://127.0.0.1:3306/pccw?useAffectedRows=true&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL
-    username: root
-    password: root
-    dbcp2:
-      validation-query: SELECT 1
-      pool-prepared-statements: true
-    platform: mysql
-    schema: classpath:schema.sql
-    initialization-mode: always
+  profiles:
+    active: dev
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
 
 mybatis:
   configuration:

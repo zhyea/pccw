@@ -1,6 +1,7 @@
 package org.chobit.cm.biz.service;
 
 
+import org.chobit.cm.biz.tools.MyBatisBatchOperator;
 import org.chobit.cm.common.entity.User;
 import org.chobit.cm.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,18 @@ public class UserService {
 
 
     public int batchInsert(List<User> users) {
+        return MyBatisBatchOperator.operate(users, UserMapper.class, (user, mapper) -> mapper.insert(user));
+    }
+
+
+    /**
+     * 批量新增用户
+     * (小规模用户用这个，大量用户用前者)
+     *
+     * @param users 用户集合
+     * @return 新增用户数
+     */
+    public int batchInsert2(List<User> users) {
         return userMapper.batchInsert(users);
     }
 
@@ -44,6 +57,11 @@ public class UserService {
 
     public boolean update(User user) {
         return userMapper.update(user);
+    }
+
+
+    public boolean delete(Long id) {
+        return userMapper.delete(id);
     }
 
 
