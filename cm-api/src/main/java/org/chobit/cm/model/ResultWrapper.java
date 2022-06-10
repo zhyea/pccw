@@ -3,6 +3,9 @@ package org.chobit.cm.model;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 
+/**
+ * @author robin
+ */
 @ConditionalOnWebApplication
 public class ResultWrapper<T> {
 

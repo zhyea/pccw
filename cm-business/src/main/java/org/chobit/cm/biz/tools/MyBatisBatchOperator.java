@@ -8,6 +8,10 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import java.util.List;
 import java.util.function.BiFunction;
 
+
+/**
+ * @author robin
+ */
 public final class MyBatisBatchOperator {
 
 

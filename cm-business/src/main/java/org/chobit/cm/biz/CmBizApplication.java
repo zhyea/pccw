@@ -8,6 +8,9 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * @author robin
+ */
 @EnableCaching
 @SpringBootApplication
 @ComponentScan({"org.chobit.cm"})

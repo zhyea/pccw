@@ -5,6 +5,9 @@ import org.chobit.cm.common.entity.User;
 
 import java.util.List;
 
+/**
+ * @author robin
+ */
 @Mapper
 public interface UserMapper {
 

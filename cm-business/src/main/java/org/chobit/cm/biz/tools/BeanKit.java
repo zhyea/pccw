@@ -2,6 +2,9 @@ package org.chobit.cm.biz.tools;
 
 import org.springframework.context.ApplicationContext;
 
+/**
+ * @author robin
+ */
 public final class BeanKit {
 
 

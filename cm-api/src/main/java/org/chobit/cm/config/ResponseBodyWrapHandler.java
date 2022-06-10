@@ -7,9 +7,7 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
- * Auth: MaSj
- * Desc:
- * Date: 2017/9/19 10:12
+ * @author robin
  */
 public class ResponseBodyWrapHandler implements HandlerMethodReturnValueHandler {
 

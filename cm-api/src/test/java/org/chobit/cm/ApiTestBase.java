@@ -1,15 +1,16 @@
 package org.chobit.cm;
 
 import org.chobit.cm.model.ResultWrapper;
-import org.junit.Assert;
+import org.chobit.common.utils.JsonKit;
+import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.chobit.cm.tools.JsonUtils.fromJson;
-import static org.chobit.cm.tools.JsonUtils.toJson;
-
+/**
+ * @author robin
+ */
 public abstract class ApiTestBase extends TestBase {
 
 
@@ -29,8 +30,8 @@ public abstract class ApiTestBase extends TestBase {
 
     protected <T> T testGet(String path, Class<T> tClass) {
         Object r = testGet(path);
-        String json = toJson(r);
-        return fromJson(json, tClass);
+        String json = JsonKit.toJson(r);
+        return JsonKit.fromJson(json, tClass);
     }
 
 
@@ -44,10 +45,10 @@ public abstract class ApiTestBase extends TestBase {
     }
 
     private Object getResponse(ResultWrapper wrapper) {
-        System.out.println(toJson(wrapper));
+        System.out.println(JsonKit.toJson(wrapper));
 
-        Assert.assertNotNull(wrapper);
-        Assert.assertEquals(HttpStatus.OK.value(), wrapper.getCode());
+        Assertions.assertNotNull(wrapper);
+        Assertions.assertEquals(HttpStatus.OK.value(), wrapper.getCode());
 
         return null == wrapper.getResult() ? "" : wrapper.getResult();
     }

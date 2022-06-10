@@ -3,8 +3,10 @@ package org.chobit.cm.common.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * @author robin
+ */
 public class User implements Serializable {
-
 
     private Long id;
 

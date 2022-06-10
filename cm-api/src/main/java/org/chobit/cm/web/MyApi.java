@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author robin
+ */
 @RestController
 @RequestMapping(value = "/api/zhyea")
 public class MyApi {
