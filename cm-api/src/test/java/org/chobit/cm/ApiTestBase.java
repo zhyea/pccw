@@ -1,6 +1,6 @@
 package org.chobit.cm;
 
-import org.chobit.cm.model.ResultWrapper;
+import org.chobit.cm.common.model.ResultWrapper;
 import org.chobit.common.utils.JsonKit;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,7 @@ public abstract class ApiTestBase extends TestBase {
         Assertions.assertNotNull(wrapper);
         Assertions.assertEquals(HttpStatus.OK.value(), wrapper.getCode());
 
-        return null == wrapper.getResult() ? "" : wrapper.getResult();
+        return null == wrapper.getContent() ? "" : wrapper.getContent();
     }
 
 

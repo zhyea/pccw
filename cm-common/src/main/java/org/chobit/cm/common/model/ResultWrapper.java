@@ -1,19 +1,28 @@
-package org.chobit.cm.model;
+package org.chobit.cm.common.model;
 
-
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 
 /**
  * @author robin
  */
-@ConditionalOnWebApplication
 public class ResultWrapper<T> {
 
     private int code = 200;
 
     private String message;
 
-    private T result;
+    private T content;
+
+    public ResultWrapper() {
+    }
+
+    public ResultWrapper(T content) {
+        this.content = content;
+    }
+
+    public ResultWrapper(int code, T content) {
+        this.code = code;
+        this.content = content;
+    }
 
     public int getCode() {
         return code;
@@ -31,12 +40,12 @@ public class ResultWrapper<T> {
         this.message = message;
     }
 
-    public T getResult() {
-        return result;
+    public T getContent() {
+        return content;
     }
 
-    public void setResult(T result) {
-        this.result = result;
+    public void setContent(T content) {
+        this.content = content;
     }
 
     @Override
@@ -44,7 +53,7 @@ public class ResultWrapper<T> {
         return "ResultWrapper{" +
                 "code=" + code +
                 ", message='" + message + '\'' +
-                ", result=" + result +
+                ", result=" + content +
                 '}';
     }
 }

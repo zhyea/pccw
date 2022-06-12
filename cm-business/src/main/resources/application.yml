@@ -10,6 +10,28 @@ spring:
       mode: always
       schema-locations: classpath:schema.sql
 
+
 mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    httptrace:
+      enabled: true
+  info:
+    encoding: utf8
+    build:
+      enabled: true

@@ -1,5 +1,6 @@
 package org.chobit.cm.biz.web;
 
+import org.chobit.cm.biz.spring.response.ResponseWrapperBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("")
+@ResponseWrapperBody
 public class IndexController {
 
 
@@ -17,5 +19,10 @@ public class IndexController {
         return "Hello World!";
     }
 
+
+    @GetMapping("")
+    public String index() {
+        return "ping";
+    }
 
 }

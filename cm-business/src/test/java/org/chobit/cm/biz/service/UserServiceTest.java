@@ -2,15 +2,14 @@ package org.chobit.cm.biz.service;
 
 import org.chobit.cm.biz.TestBase;
 import org.chobit.cm.common.entity.User;
-import org.chobit.common.tools.ShortCode;
-import org.chobit.common.utils.StrKit;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.LinkedList;
 import java.util.List;
+
+import static org.chobit.cm.biz.tools.InstanceGenerator.genUsers;
 
 
 public class UserServiceTest extends TestBase {
@@ -45,23 +44,13 @@ public class UserServiceTest extends TestBase {
 
     @Test
     public void batchInsert() {
-        List<User> users = newUsers();
+        List<User> users = genUsers();
         int count = userService.batchInsert(users);
         System.out.println(count);
         Assertions.assertEquals(100, count);
     }
 
 
-    private List<User> newUsers() {
-        List<User> users = new LinkedList<>();
-        for (int i = 0; i < 100; i++) {
-            User u = new User();
-            u.setUsername(ShortCode.gen());
-            u.setEmail("robin" + i + "@zhyea.com");
-            u.setName("robin-" + StrKit.format("00", i));
-            users.add(u);
-        }
-        return users;
-    }
+
 
 }
