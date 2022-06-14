@@ -1,26 +1,19 @@
-package org.chobit.cm.biz.web;
+package org.chobit.cm.web;
+
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author robin
- */
 @RestController
 @RequestMapping("")
 public class IndexController {
 
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello World!";
-    }
-
-
     @GetMapping("")
-    public String index() {
-        return "ping";
+    public String index(@RequestParam("name") String name) {
+        return "Hello " + name + "!";
     }
 
 }

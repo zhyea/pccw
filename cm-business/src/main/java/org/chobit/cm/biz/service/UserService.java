@@ -1,11 +1,17 @@
 package org.chobit.cm.biz.service;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.chobit.cm.biz.tools.MyBatisBatchOperator;
+import org.chobit.cm.common.constants.UserState;
 import org.chobit.cm.common.entity.User;
+import org.chobit.cm.common.model.PageReq;
+import org.chobit.cm.common.model.PageResult;
 import org.chobit.cm.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +41,22 @@ public class UserService {
     }
 
 
+    @Cacheable(key = "'findInPage:' + #req", unless = "#result == null")
+    public PageResult<User> findInPage(PageReq req) {
+        String key = "%" + req.getKeywords() + "%";
+        PageHelper.startPage(req.getPageNo(), req.getPageSize(), req.getSort()).count(true);
+        List<User> data = userMapper.findByKey(key);
+        PageInfo<User> r = new PageInfo<>(data);
+        PageResult<User> result = new PageResult<>();
+
+        result.setPageNo(req.getPageNo());
+        result.addData(data);
+        result.setTotal(r.getTotal());
+        result.setTotalPage(r.getPageSize());
+        return result;
+    }
+
+
     public int batchInsert(List<User> users) {
         return MyBatisBatchOperator.operate(users, UserMapper.class, (user, mapper) -> mapper.insert(user));
     }
@@ -58,14 +80,26 @@ public class UserService {
     }
 
 
+    @CacheEvict(allEntries = true)
     public boolean update(User user) {
         return userMapper.update(user);
     }
 
 
+    @CacheEvict(allEntries = true)
     public boolean delete(Long id) {
         return userMapper.delete(id);
     }
 
+
+    @CacheEvict(allEntries = true)
+    public boolean updateState(Long id, UserState state) {
+        return userMapper.updateState(id, state.code);
+    }
+
+
+    public List<User> findByState(UserState state) {
+        return userMapper.findByState(state.code);
+    }
 
 }

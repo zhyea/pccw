@@ -2,6 +2,8 @@ package org.chobit.cm.biz.service;
 
 import org.chobit.cm.biz.TestBase;
 import org.chobit.cm.common.entity.User;
+import org.chobit.cm.common.model.PageReq;
+import org.chobit.cm.common.model.PageResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -51,6 +53,16 @@ public class UserServiceTest extends TestBase {
     }
 
 
+    @Test
+    public void findInPage(){
+        PageReq req = new PageReq();
+        req.setPageSize(6);
+        req.setPageNo(1);
+        req.setKeywords("rob");
+
+        PageResult<User> r = userService.findInPage(req);
+        Assertions.assertNotNull(r);
+    }
 
 
 }

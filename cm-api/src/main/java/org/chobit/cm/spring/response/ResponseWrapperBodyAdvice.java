@@ -1,4 +1,4 @@
-package org.chobit.cm.spring;
+package org.chobit.cm.spring.response;
 
 import org.chobit.cm.common.model.ResultWrapper;
 import org.chobit.common.utils.JsonKit;

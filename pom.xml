@@ -56,6 +56,11 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>2.2.10.RELEASE</version>
+            </dependency>
+            <dependency>
                 <groupId>org.chobit.cm</groupId>
                 <artifactId>cm-common</artifactId>
                 <version>${project.version}</version>
@@ -79,6 +84,11 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>2.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>31.1-jre</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

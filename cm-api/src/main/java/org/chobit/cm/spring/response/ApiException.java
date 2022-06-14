@@ -1,4 +1,4 @@
-package org.chobit.cm.spring;
+package org.chobit.cm.spring.response;
 
 /**
  * @author robin

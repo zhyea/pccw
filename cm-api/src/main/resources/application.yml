@@ -3,7 +3,36 @@ debug: false
 spring:
   application:
     name: cm-api
+  profiles:
+    active: dev
 #
 eureka:
   instance:
     prefer-ip-address: true
+#
+feign:
+  httpclient:
+    max-connections: 10
+    max-connections-per-route: 8
+#
+mail:
+  host: smtp.chobit.org
+  username: robinZhang
+  password: thisIsPassword
+  sender: admin@chobit.org
+#
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failureRateThreshold: 50
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: PT5S
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 2
+        waitDurationInOpenState: PT5S
+    instances:
+      userFeignApi:
+        baseConfig: default

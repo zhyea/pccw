@@ -9,6 +9,7 @@ create table if not exists user
     password    varchar(64),
     email       varchar(64) unique not null,
     name        varchar(32),
+    state       int                         default 0,
 
     deleted     int                         default 0,
     op_time     timestamp          not null default current_timestamp on update current_timestamp,

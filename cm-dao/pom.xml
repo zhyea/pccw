@@ -35,6 +35,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <!-- page helper -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.2</version>
+        </dependency>
         <dependency>
             <groupId>org.chobit.cm</groupId>
             <artifactId>cm-common</artifactId>

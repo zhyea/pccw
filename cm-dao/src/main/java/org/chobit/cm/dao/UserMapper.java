@@ -79,11 +79,43 @@ public interface UserMapper {
 
 
     /**
+     * 根据关键字查询用户记录
+     *
+     * @param key 关键字
+     * @return 用户集合
+     */
+    @Select({"select * from user where deleted=0 and name like #{key}"})
+    List<User> findByKey(@Param("key") String key);
+
+
+    /**
      * 删除用户记录
      *
      * @param id 记录ID
      * @return 是否删除成功
      */
-    @Delete({"delete from user where id=#{id}"})
+    @Update({"update user set deleted=1 where id=#{id}"})
     boolean delete(@Param("id") Long id);
+
+
+    /**
+     * 更新状态
+     *
+     * @param id    记录ID
+     * @param state 状态值
+     * @return 是否更新成功
+     */
+    @Update({"update user set state=#{state} where id=#{id}"})
+    boolean updateState(@Param("id") Long id,
+                        @Param("state") int state);
+
+
+    /**
+     * 根据状态码查询用户记录
+     *
+     * @param state 状态
+     * @return 用户记录
+     */
+    @Select({"select * from user where deleted=0 and state=#{state}"})
+    List<User> findByState(@Param("state") int state);
 }

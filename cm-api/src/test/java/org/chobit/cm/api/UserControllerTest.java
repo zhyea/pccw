@@ -1,14 +1,14 @@
-package org.chobit.cm.biz.api;
+package org.chobit.cm.api;
 
-import org.chobit.cm.biz.ApiTestBase;
+import com.fasterxml.jackson.core.type.TypeReference;
+import org.chobit.cm.ApiTestBase;
 import org.chobit.cm.common.entity.User;
+import org.chobit.cm.common.model.PageReq;
+import org.chobit.cm.common.model.PageResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.chobit.cm.biz.tools.InstanceGenerator.genUsers;
 
 /**
  * @author robin
@@ -59,6 +59,23 @@ public class UserControllerTest extends ApiTestBase {
 
 
     @Test
+    @Order(3)
+    public void findInPage() {
+        PageReq req = new PageReq();
+        req.setPageSize(6);
+        req.setPageNo(1);
+        req.setKeywords("rob");
+
+        String json = testPost("/data", req);
+        String json2 = testPost("/data", req);
+
+        PageResult<User> result = fromResult(json, new TypeReference<PageResult<User>>() {
+        });
+        Assertions.assertNotNull(result);
+    }
+
+
+    @Test
     @Order(2)
     public void update() {
         User user = new User();
@@ -71,17 +88,6 @@ public class UserControllerTest extends ApiTestBase {
 
         Boolean r = fromResult(json, Boolean.class);
         Assertions.assertTrue(r);
-    }
-
-
-    @Test
-    @Order(4)
-    public void batchInsert() {
-        List<User> users = genUsers();
-        String json = testPost("/batch", users);
-
-        int count = fromResult(json, Integer.class);
-        Assertions.assertEquals(100, count);
     }
 
 

@@ -1,4 +1,4 @@
-package org.chobit.cm.spring;
+package org.chobit.cm.spring.response;
 
 
 import org.chobit.cm.common.model.ResultWrapper;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import static org.chobit.cm.spring.ApiErrorCode.BAD_REQUEST;
-import static org.chobit.cm.spring.ApiErrorCode.MISSING_PARAMETER;
+import static org.chobit.cm.spring.response.ApiErrorCode.BAD_REQUEST;
+import static org.chobit.cm.spring.response.ApiErrorCode.MISSING_PARAMETER;
 
 
 /**

@@ -1,9 +1,9 @@
 package org.chobit.cm.tools;
 
 
-import org.chobit.cm.spring.ApiException;
+import org.chobit.cm.spring.response.ApiException;
 
-import static org.chobit.cm.spring.ApiErrorCode.BAD_REQUEST;
+import static org.chobit.cm.spring.response.ApiErrorCode.BAD_REQUEST;
 import static org.chobit.common.utils.StrKit.isBlank;
 
 /**
@@ -88,6 +88,16 @@ public final class Args {
      */
     public static void checkNonNegative(double src, String errMsg) {
         check(src < 0, errMsg);
+    }
+
+
+    /**
+     * 检查是否是有效邮箱地址
+     *
+     * @param email 邮箱地址
+     */
+    public static void checkEmail(String email) {
+        check(!email.matches("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+"), "邮箱格式非法");
     }
 
 

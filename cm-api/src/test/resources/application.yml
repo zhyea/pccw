@@ -5,4 +5,6 @@ server:
 
 spring:
   application:
-    name: spring-boot-test2
+    name: cm-api
+  profiles:
+    active: dev
