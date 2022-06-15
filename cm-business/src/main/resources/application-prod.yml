@@ -5,9 +5,8 @@ server:
 spring:
   datasource:
     type: org.apache.commons.dbcp2.BasicDataSource
-    url: jdbc:mysql://127.0.0.1:3306/pccw?useAffectedRows=true&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL
-    username: root
-    password: root
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
     dbcp2:
       validation-query: SELECT 1
       pool-prepared-statements: true
@@ -15,6 +14,14 @@ spring:
     init:
       username: root
       password: root
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true
+        trace: true
+
 
 eureka:
   client:
