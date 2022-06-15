@@ -9,6 +9,7 @@ import org.chobit.cm.tools.Args;
 import org.chobit.cm.tools.DES;
 import org.chobit.cm.tools.MailSender;
 import org.chobit.common.codec.MD5;
+import org.chobit.common.concurrent.Threads;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,14 +75,19 @@ public class UserService {
         Long id = userApi.insert(user);
         user.setId(id);
 
-        inform(user);
-        userApi.updateState(user.getId(), UserState.INFORMED);
+        // 这个最好通过消息队列来做，环境限制，暂用异步线程完成
+        Threads.newThread(()->{
+            inform(user);
+            userApi.updateState(user.getId(), UserState.INFORMED);
+        }, "new-user-inform", false);
+
         return id;
     }
 
 
     @CacheEvict(allEntries = true)
     public boolean update(User user) {
+        user.setPassword(MD5.encode(user.getPassword() + SECRET_KEY));
         return userApi.update(user);
     }
 

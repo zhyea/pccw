@@ -96,7 +96,7 @@ public interface UserFeignApi {
      * @param state 状态
      * @return 是否更新成功
      */
-    @PutMapping("/changeState")
+    @PutMapping("/user/changeState")
     boolean updateState(@RequestParam("id") Long id,
                         @RequestParam("state") UserState state);
 
@@ -106,6 +106,6 @@ public interface UserFeignApi {
      * @param state 状态
      * @return 用户记录
      */
-    @GetMapping("/find-by-state/{state}")
+    @GetMapping("/user/find-by-state/{state}")
     List<User> findByState(@PathVariable("state") UserState state);
 }

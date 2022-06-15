@@ -7,7 +7,7 @@ create table if not exists user
 
     username    varchar(32) unique not null,
     password    varchar(64),
-    email       varchar(64) unique not null,
+    email       varchar(64)        not null,
     name        varchar(32),
     state       int                         default 0,
 

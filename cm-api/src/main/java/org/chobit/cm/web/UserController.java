@@ -51,7 +51,7 @@ public class UserController {
 
     @PostMapping("")
     public Long insert(@RequestBody User user) {
-        Args.checkNull(user, "用户不能为空");
+        Args.checkNotNull(user, "用户不能为空");
         Args.checkNotBlank(user.getUsername(), "username不能为空");
         Args.checkNotBlank(user.getEmail(), "邮箱不能为空");
         Args.checkEmail(user.getEmail());
@@ -61,7 +61,7 @@ public class UserController {
 
     @PutMapping("")
     public boolean update(@RequestBody User user) {
-        Args.checkNull(user, "用户不能为空");
+        Args.checkNotNull(user, "用户不能为空");
         Args.checkPositive(user.getId(), "用户ID大于0");
         Args.checkNotBlank(user.getUsername(), "username不能为空");
         Args.checkNotBlank(user.getEmail(), "邮箱不能为空");
@@ -71,7 +71,7 @@ public class UserController {
 
     @PostMapping("/batch")
     public int batchInsert(@RequestBody List<User> users) {
-        Args.checkNull(users, "用户集合不能为空");
+        Args.checkNotNull(users, "用户集合不能为空");
         return userService.batchInsert(users);
     }
 

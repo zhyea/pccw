@@ -66,7 +66,7 @@ public final class MailSender {
 
 
     public static void send(String subject, String text, String... receiver) {
-        send(subject, text, receiver, new HashMap<>(0));
+        //send(subject, text, receiver, new HashMap<>(0));
     }
 
 

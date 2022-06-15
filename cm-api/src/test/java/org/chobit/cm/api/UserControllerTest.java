@@ -5,9 +5,14 @@ import org.chobit.cm.ApiTestBase;
 import org.chobit.cm.common.entity.User;
 import org.chobit.cm.common.model.PageReq;
 import org.chobit.cm.common.model.PageResult;
+import org.chobit.cm.tools.DES;
+import org.chobit.cm.tools.InstanceGenerator;
+import org.chobit.common.model.ParamMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 
 /**
@@ -26,8 +31,9 @@ public class UserControllerTest extends ApiTestBase {
     public void insert() {
         User user = new User();
         user.setName("robin");
-        user.setUsername("robinZhyea");
+        user.setUsername("robinZhang01");
         user.setEmail("robin@zhyea.com");
+        user.setPassword("robinPwd");
 
         String json = testPost("", user);
 
@@ -81,7 +87,8 @@ public class UserControllerTest extends ApiTestBase {
         User user = new User();
         user.setId(1L);
         user.setName("robin-1");
-        user.setUsername("robinZhyea");
+        user.setUsername("robinZhang");
+        user.setPassword("test11112");
         user.setEmail("robin@zhyea.com");
 
         String json = testPut("", null, user);
@@ -90,14 +97,52 @@ public class UserControllerTest extends ApiTestBase {
         Assertions.assertTrue(r);
     }
 
+    @Test
+    @Order(4)
+    public void batchInsert() {
+        List<User> users = InstanceGenerator.genUsers();
+        String json = testPost("/batch", users);
+
+        int count = fromResult(json, Integer.class);
+        Assertions.assertEquals(100, count);
+    }
+
 
     @Test
     @Order(5)
     public void delete() {
-        long id = 2L;
+        long id = 108L;
         String json = testDelete("/" + id);
 
         Boolean r = fromResult(json, Boolean.class);
+        Assertions.assertNotNull(r);
+    }
+
+
+    @Test
+    @Order(6)
+    public void verify() {
+        String key = DES.encrypt(String.valueOf(1), "两只烤鸭往北走");
+        String json = testGet("/verify/" + key);
+
+        User r = fromResult(json, User.class);
+        Assertions.assertNotNull(r);
+    }
+
+
+    @Test
+    @Order(6)
+    public void check() {
+        String username = "robinZhang";
+        String password = "test11112";
+
+        ParamMap<Object> params = new ParamMap<>(2);
+        params.put("username", username);
+        params.put("password", password);
+
+        String json = testPostForm("/check", null, params);
+
+        User r = fromResult(json, User.class);
         Assertions.assertNotNull(r);
     }
 

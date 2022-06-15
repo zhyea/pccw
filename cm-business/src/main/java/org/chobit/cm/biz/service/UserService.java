@@ -26,8 +26,12 @@ import java.util.List;
 public class UserService {
 
 
+    private final UserMapper userMapper;
+
     @Autowired
-    private UserMapper userMapper;
+    public UserService(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Cacheable(key = "'get:' + #id", unless = "#result == null")
     public User get(Long id) {
