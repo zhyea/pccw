@@ -22,6 +22,7 @@ mv pccw-main pccw
 ### 2. 编译打包
 
 ```shell
+cd pccw
 mvn clean package -DskipTests
 ```
 
