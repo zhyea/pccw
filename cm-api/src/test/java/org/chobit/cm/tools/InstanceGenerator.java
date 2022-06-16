@@ -13,9 +13,9 @@ import java.util.List;
 public final class InstanceGenerator {
 
 
-    public static List<User> genUsers() {
+    public static List<User> genUsers(int cnt) {
         List<User> users = new LinkedList<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < cnt; i++) {
             User u = new User();
             u.setUsername(ShortCode.gen());
             u.setEmail("robin" + i + "@zhyea.com");

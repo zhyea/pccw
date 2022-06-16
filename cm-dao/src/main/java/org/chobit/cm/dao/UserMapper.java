@@ -19,7 +19,7 @@ public interface UserMapper {
      * @return 用户ID
      */
     @Insert({
-            "insert into user (username, password, email, name)",
+            "insert into `user` (username, password, email, name)",
             "values (#{username}, #{password}, #{email}, #{name})"
     })
     @Options(useGeneratedKeys = true, keyProperty = "id")
@@ -35,7 +35,7 @@ public interface UserMapper {
      */
     @Insert({
             "<script>",
-            "insert into user(username, password, email, name)",
+            "insert into `user` (username, password, email, name)",
             "values",
             "<foreach collection='users' item='item' separator=','>",
             "(#{item.username}, #{item.password}, #{item.email}, #{item.name})",
@@ -51,7 +51,7 @@ public interface UserMapper {
      * @return 是否更新成功
      */
     @Update({
-            "update user set",
+            "update `user` set",
             "username=#{username}, password=#{password}, email=#{email}, name=#{name}",
             "where id=#{id}"
     })
@@ -64,7 +64,7 @@ public interface UserMapper {
      * @param id 记录ID
      * @return 用户记录
      */
-    @Select({"select * from user where id=#{id}"})
+    @Select({"select * from `user` where id=#{id}"})
     User get(@Param("id") Long id);
 
 
@@ -74,7 +74,7 @@ public interface UserMapper {
      * @param username 用户名
      * @return 用户记录
      */
-    @Select({"select * from user where username=#{username}"})
+    @Select({"select * from `user` where username=#{username}"})
     User getByUsername(@Param("username") String username);
 
 
@@ -84,7 +84,7 @@ public interface UserMapper {
      * @param key 关键字
      * @return 用户集合
      */
-    @Select({"select * from user where deleted=0 and name like #{key}"})
+    @Select({"select * from `user` where deleted=0 and name like #{key}"})
     List<User> findByKey(@Param("key") String key);
 
 
@@ -94,7 +94,7 @@ public interface UserMapper {
      * @param id 记录ID
      * @return 是否删除成功
      */
-    @Update({"update user set deleted=1 where id=#{id}"})
+    @Update({"update `user` set deleted=1 where id=#{id}"})
     boolean delete(@Param("id") Long id);
 
 
@@ -105,7 +105,7 @@ public interface UserMapper {
      * @param state 状态值
      * @return 是否更新成功
      */
-    @Update({"update user set state=#{state} where id=#{id}"})
+    @Update({"update `user` set state=#{state} where id=#{id}"})
     boolean updateState(@Param("id") Long id,
                         @Param("state") int state);
 
@@ -116,6 +116,6 @@ public interface UserMapper {
      * @param state 状态
      * @return 用户记录
      */
-    @Select({"select * from user where deleted=0 and state=#{state}"})
+    @Select({"select * from `user` where deleted=0 and state=#{state}"})
     List<User> findByState(@Param("state") int state);
 }

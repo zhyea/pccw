@@ -31,7 +31,7 @@ public class UserControllerTest extends ApiTestBase {
     public void insert() {
         User user = new User();
         user.setName("robin");
-        user.setUsername("robinZhang01");
+        user.setUsername("robinZhang02");
         user.setEmail("robin@zhyea.com");
         user.setPassword("robinPwd");
 
@@ -54,6 +54,23 @@ public class UserControllerTest extends ApiTestBase {
 
 
     @Test
+    @Order(2)
+    public void update() {
+        User user = new User();
+        user.setId(1L);
+        user.setName("robin-1");
+        user.setUsername("robinZhyea");
+        user.setPassword("test11112");
+        user.setEmail("robin@zhyea.com");
+
+        String json = testPut("", null, user);
+
+        Boolean r = fromResult(json, Boolean.class);
+        Assertions.assertTrue(r);
+    }
+
+
+    @Test
     @Order(3)
     public void getByUsername() {
         String username = "robinZhyea";
@@ -61,6 +78,16 @@ public class UserControllerTest extends ApiTestBase {
 
         User user = fromResult(json, User.class);
         Assertions.assertNotNull(user);
+    }
+
+    @Test
+    @Order(2)
+    public void batchInsert() {
+        List<User> users = InstanceGenerator.genUsers(4);
+        String json = testPost("/batch", users);
+
+        int count = fromResult(json, Integer.class);
+        Assertions.assertEquals(4, count);
     }
 
 
@@ -78,33 +105,6 @@ public class UserControllerTest extends ApiTestBase {
         PageResult<User> result = fromResult(json, new TypeReference<PageResult<User>>() {
         });
         Assertions.assertNotNull(result);
-    }
-
-
-    @Test
-    @Order(2)
-    public void update() {
-        User user = new User();
-        user.setId(1L);
-        user.setName("robin-1");
-        user.setUsername("robinZhang");
-        user.setPassword("test11112");
-        user.setEmail("robin@zhyea.com");
-
-        String json = testPut("", null, user);
-
-        Boolean r = fromResult(json, Boolean.class);
-        Assertions.assertTrue(r);
-    }
-
-    @Test
-    @Order(4)
-    public void batchInsert() {
-        List<User> users = InstanceGenerator.genUsers();
-        String json = testPost("/batch", users);
-
-        int count = fromResult(json, Integer.class);
-        Assertions.assertEquals(100, count);
     }
 
 
@@ -133,7 +133,7 @@ public class UserControllerTest extends ApiTestBase {
     @Test
     @Order(6)
     public void check() {
-        String username = "robinZhang";
+        String username = "robinZhyea";
         String password = "test11112";
 
         ParamMap<Object> params = new ParamMap<>(2);

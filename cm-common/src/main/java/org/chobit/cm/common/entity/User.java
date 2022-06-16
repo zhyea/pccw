@@ -14,12 +14,13 @@ public class User implements Serializable {
 
     private String password;
 
-
     private String email;
 
     private String name;
 
     private int deleted;
+
+    private int state;
 
     private LocalDateTime opTime;
 
@@ -88,6 +89,14 @@ public class User implements Serializable {
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     @Override
